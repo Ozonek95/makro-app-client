@@ -1,0 +1,54 @@
+form.normal-form{
+ margin: 10px;
+}
+
+.controlers-container{
+ width: 100%;
+ padding: 5%;
+}
+
+mat-form-field {
+ display: block;
+ width: 40%;
+}
+
+.add-bottom-padding {
+ padding-bottom: 10px;
+}
+
+mat-radio-group mat-radio-button {
+ margin-left: 7px;
+}
+
+.container {
+ display: flex
+}
+
+.flex-child {
+ flex: 1;
+}
+
+.button-row {
+ margin-left: 25px;
+}
+
+.zapisany-produkt {
+ margin: 5px;;
+}
+
+.zapisane-źródła-header {
+ font-size: 18px;
+ font-weight: 500;
+}
+
+.formularz {
+ margin: 25px;
+}
+
+button {
+ margin: 5px;
+}
+
+.separator {
+ margin: 20px;
+}

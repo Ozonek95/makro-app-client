@@ -1,0 +1,81 @@
+<mat-toolbar>
+  Dodaj lub usuń produkt
+</mat-toolbar>
+<div class="container">
+  <div class="formularz flex-child">
+    <form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+      <div class="controlers-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <mat-label>Nazwa</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ilość w 100g</mat-label>
+          <input type=number formControlName="quantityInHundredGrams" matInput>
+        </mat-form-field>
+        <div class="add-bottom-padding"></div>
+        <mat-radio-group formControlName="makroZrodlo">
+          <mat-radio-button *ngFor="let option of makroOptions"
+          [checked]="option.checked" [value]="option.value">
+          {{option.name}}
+        </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Zapisz</button>
+      </div>
+    </form>
+  </div>
+  <div class="flex-child">
+
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="zapisane-źródła-header">Zapisane źródła białka:</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            Otwórz
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="zapisany-produkt" *ngFor="let product of getProducts('WHEY')">
+          {{product.name}}, w 100g: {{product.quantityInHundredGrams}}g 
+          <button mat-button color="warn" class="usun-produkt-button" (click)="delete(product)">Usuń</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="zapisane-źródła-header">Zapisane źródła tłuszczu:</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            Otwórz
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="zapisany-produkt" *ngFor="let product of getProducts('FAT')">
+          {{product.name}}, w 100g: {{product.quantityInHundredGrams}}g 
+          <button mat-button color="warn" class="usun-produkt-button" (click)="delete(product)">Usuń</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="zapisane-źródła-header">Zapisane źródła węgli:</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            Otwórz
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="zapisany-produkt" *ngFor="let product of getProducts('CARBO')">
+          {{product.name}}, w 100g: {{product.quantityInHundredGrams}}g 
+          <button mat-button color="warn" class="usun-produkt-button" (click)="delete(product)">Usuń</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+</div>

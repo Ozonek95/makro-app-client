@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.button-row button {
+ margin: 5px;
+}
+
+.material-icons {
+ cursor: pointer;
+ font-size: 20px;
+ margin-left: 10px;
+}

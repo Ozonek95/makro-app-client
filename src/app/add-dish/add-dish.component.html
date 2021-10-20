@@ -1,0 +1,82 @@
+<mat-toolbar>
+ Dodaj lub usuń danie
+</mat-toolbar>
+
+<div class="container">
+ <div class="formularz flex-child">
+
+  <form [formGroup]="formDish" autocomplete="off">
+
+   <mat-form-field autocomplete="off">
+    <input matInput name="random" autocomplete="off" placeholder="Nazwa dania" formControlName="name">
+   </mat-form-field>
+
+   <h3>Produkty:</h3>
+
+   <div formArrayName="products">
+    <div *ngFor="let product of productForms.controls; let i=index" [formGroupName]="i">
+   
+     <mat-form-field class="example-full-width" appearance="fill">
+      <input type="text"
+             placeholder="Nazwa produktu"
+             matInput
+             formControlName="name"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions![i] | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+     <button mat-raised-button color="warn" (click)="deleteProduct(i)">Usuń</button>
+    </div>
+   </div>
+
+   <button mat-raised-button color="basic" (click)="addProduct()">Dodaj produkt do dania</button>
+
+   <div class="separator"></div>
+
+   <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="formDish.invalid">Zapisz danie</button>
+
+  </form>
+
+ </div>
+ <div class="flex-child">
+  <mat-accordion>
+   <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+     <mat-panel-title>
+      <span class="zapisane-źródła-header">Zapisane dania:</span>
+     </mat-panel-title>
+     <mat-panel-description>
+      Otwórz
+     </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="zapisany-produkt" *ngFor="let danie of dania">
+
+     <mat-accordion>
+      <mat-expansion-panel hideToggle>
+       <mat-expansion-panel-header>
+        <mat-panel-title>
+         <span class="zapisane-źródła-header">{{danie.name}}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+         Szczegóły
+        </mat-panel-description>
+       </mat-expansion-panel-header>
+       <h3>Produkty:</h3>
+       <div class="zapisany-produkt" *ngFor="let produkt of danie.products">
+        {{produkt.name}}
+       </div>
+
+       <button mat-raised-button color="warn" (click)="delete(danie)">Usuń danie</button>
+
+      </mat-expansion-panel>
+     </mat-accordion>
+
+    </div>
+   </mat-expansion-panel>
+  </mat-accordion>
+ </div>
+</div>

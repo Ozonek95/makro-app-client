@@ -1,0 +1,16 @@
+<div class="content" *ngIf="result">
+ <h2>Wynik:</h2>
+ <div *ngFor="let dishResponse of result.dishResponseEntityList">
+  <h3>{{dishResponse.name}}</h3>
+  <ng-container *ngIf="showInfo">
+   <div *ngFor="let dodatkoweInfo of dishResponse.dishInfo.additionalInfo">
+    {{dodatkoweInfo}}
+   </div>
+  </ng-container>
+  <div class="product-quantity" *ngFor="let productQuantity of dishResponse.dishInfo.productQuantities">
+   {{productQuantity.name}} - {{productQuantity.quantity}} gram.
+  </div>
+ </div>
+ <button (click)="changeShowInfo()" *ngIf="shouldShowInfoButton()" mat-raised-button
+  color="primary">{{getInfoButtonString()}}</button>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="dania">
+    <section class="example-section">
+      <h4>Wybierz dania:</h4>
+      <mat-selection-list #dishesList [(ngModel)]="selectedDishes" (ngModelChange)="onDishesChange($event)">
+        <mat-list-option *ngFor="let dish of dishes" [value]="dish">
+          {{dish.name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </section>
+  </div>
+
+  <h3>Ilość makro:</h3>
+  <form [formGroup]="makroQuantityForm">
+    <div class="input-field">
+      Tłuszcz:
+      <input type="number" formControlName="fat" />
+    </div>
+    <div class="input-field">
+      Węglowodany:
+      <input type="number" formControlName="carbo" />
+    </div>
+    <div class="input-field">
+      Białko
+      <input type="number" formControlName="whey" />
+    </div>
+  </form>
+
+  <div class="rules" *ngIf="dishesWithRuleRequired().length > 0">
+    <h3>Dla niektórych dań można ustalić ilość produktów:</h3>
+
+    <form [formGroup]="rulesForm">
+      <div formArrayName="rules">
+        <div *ngFor="let rule of rules().controls; let ruleIndex=index">
+          <div [formGroupName]="ruleIndex" class="dish-rule">
+            <mat-form-field appearance="fill">
+              <mat-label>Nazwa dania</mat-label>
+              <mat-select formControlName="dishName" (selectionChange)="dishSelectedToAddRules(ruleIndex)">
+                <mat-option *ngFor="let danie of dishesWithRuleRequired()" [value]="danie.name">
+                  {{danie.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-button color="warn" (click)="removeRule(ruleIndex)">Usuń zasadę</button>
+
+            <div formArrayName="productRuleInfos">
+              <div *ngFor="let productRuleInfo of productRuleInfos(ruleIndex).controls; let productRuleIndex=index">
+                <div [formGroupName]="productRuleIndex">
+                  <div class="input-field">
+                    <b>{{productRuleInfo.value.product.name}} {{getFirstChar(productRuleInfo.value.product.makroZrodlo)}}</b> ma stanowic:
+                    <input type="number" formControlName="quantity" /> gram.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button mat-raised-button type="button" (click)="addRule()">Dodaj zasade</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="confirm">
+    <button mat-raised-button [disabled]="isFormValid()" color="primary" (click)="submitAll()">Zatwierdź
+      formularz</button>
+  </div>
+  <result [result]="currentResult"></result>
+</div>
