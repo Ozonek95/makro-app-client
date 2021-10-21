@@ -2,10 +2,10 @@
   "name": "makro-app-client",
   "version": "0.0.0",
   "scripts": {
-    "heroku-postbuild": "ng build --prod",
+    "postinstall": "ng build --aot --target=production",
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -23,7 +23,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "path": "^0.12.7",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "typescript": "~4.3.5",
@@ -31,11 +31,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.5",
-    "@angular/cli": "~12.2.5",
-    "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
-    "express": "^4.17.1",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
