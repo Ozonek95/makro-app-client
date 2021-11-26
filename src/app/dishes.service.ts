@@ -15,13 +15,13 @@ export class DishesService {
       name: value.name,
       products: value.products.map(product => product.name),
     }
-    return this.http.post<Dish>('http://localhost:8081/api/v1/dania/dodajDanie',request);
+    return this.http.post<Dish>('http://localhost:8080/api/v1/dania/dodajDanie',request);
   }
   delete(danie: Dish) {
-    return this.http.delete<Dish>('http://localhost:8081/api/v1/dania/'+danie.id);
+    return this.http.delete<Dish>('http://localhost:8080/api/v1/dania/'+danie.id);
   }
 
   getDishes() : Observable<Dish[]> {
-    return this.http.get<Dish[]>('http://localhost:8081/api/v1/dania');
+    return this.http.get<Dish[]>('http://localhost:8080/api/v1/dania');
   }
 }
